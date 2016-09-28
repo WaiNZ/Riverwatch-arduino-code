@@ -547,35 +547,35 @@ void ADC_off(int A) {
 }
 
 /////////////////////////////////////////// IDLE power down method /////////////////////////////////////////////
-void idle(int A) { // A = 1 turn on, A =0, turn off
-  if (A == 1) {
-    // power reduction register (PRR)
-    // Bit 7 - PRTWI: Power Reduction TWI (Two wire interface)
-    // Bit 6 - PRTIM2: Power Reduction Timer/Counter2
-    // Bit 5 - PRTIM0: Power Reduction Timer/Counter0
-    // Bit 4 - Res: Reserved bit
-    // Bit 3 - PRTIM1: Power Reduction Timer/Counter1
-    // Bit 2 - PRSPI: Power Reduction Serial Peripheral Interface
-    // Bit 1 - PRUSART0: Power Reduction USART0
-    // Bit 0 - PRADC: Power Reduction ADC
-    // '1' will turn it off while '0' will turn it back on
-    // 76543210
-    PRR = PRR | 0b00100000; // disables time timmer before entering SLEEP_MODE_IDLE otherwise it will wake up every mill second.
-    set_sleep_mode (SLEEP_MODE_IDLE); // puts arduino in idle
-    sleep_enable();
-    // Put the device to sleep:
-    sleep_mode();
-    ADCSRA = 0;// disable ADC
-    PRR = PRR | 0b11101101; // turns of all but USART0
-  }
-  else {
-    sleep_disable();
-    ADCSRA = 1; // turn on ADC
-    PRR = 0b11110111; // turns on all things we tunred off
-
-  }
-
-}
+//void idle(int A) { // A = 1 turn on, A =0, turn off
+//  if (A == 1) {
+//    // power reduction register (PRR)
+//    // Bit 7 - PRTWI: Power Reduction TWI (Two wire interface)
+//    // Bit 6 - PRTIM2: Power Reduction Timer/Counter2
+//    // Bit 5 - PRTIM0: Power Reduction Timer/Counter0
+//    // Bit 4 - Res: Reserved bit
+//    // Bit 3 - PRTIM1: Power Reduction Timer/Counter1
+//    // Bit 2 - PRSPI: Power Reduction Serial Peripheral Interface
+//    // Bit 1 - PRUSART0: Power Reduction USART0
+//    // Bit 0 - PRADC: Power Reduction ADC
+//    // '1' will turn it off while '0' will turn it back on
+//    // 76543210
+//    PRR = PRR | 0b00100000; // disables time timmer before entering SLEEP_MODE_IDLE otherwise it will wake up every mill second.
+//    set_sleep_mode (SLEEP_MODE_IDLE); // puts arduino in idle
+//    sleep_enable();
+//    // Put the device to sleep:
+//    sleep_mode();
+//    ADCSRA = 0;// disable ADC
+//    PRR = PRR | 0b11101101; // turns of all but USART0
+//  }
+//  else {
+//    sleep_disable();
+//    ADCSRA = 1; // turn on ADC
+//    PRR = 0b11110111; // turns on all things we tunred off
+//
+//  }
+//
+//}
 
 
 
